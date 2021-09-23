@@ -1,0 +1,64 @@
+2021 09 11
+OT
+1 수업때 어떤거를 하게 될것인가
+1.1 레식같은 시스템의 게임
+네트워크 fps 5대5
+패키징을 하고 배포까지
+etc + 서버 AWS EC2
+
+폭탄전, 5대5 대전 라운드기반 FPS
+
+
+2021 09 12
+액션 매핑
+1. Yaw pitch roll 설명 (마우스 회전)
+2. wasd 축매핑 정의
+3. 무브 포워드 Get Control Rotation -> MakeRotator -> GetForwardVector
+
+플레이 창에서 플레이어수 2, 넷모드 Play as Client 하면 두명에서 하는듯하게 에디터에서 할 수 있다
+4. 언리얼 네트워크 구조
+언리얼은 Client - Server Model (중앙에 서버가 있고, 클라이언트들이 주변에서 접근을 하는 방식)
+
+2 types
+listen Server - 서버이자 클라이언트. 서버역할도 하고 클라역할도 하는 서버다
+Dedicated Server - 서버 역할만 함. 렌더링 관련 처리 아예안함. 
+
+Has Authority 엑터에 대한 권한을 가지고 있는지
+시즈를 예로) 
+
+비긴플레이에서 클라이언트와 서버가 해즈오쏘리티(권한)를 가지고 있는지 확인하기.(Okay Nope) 써있는 디버그 사진
+
+3가지 rule
+Authority - 모든 권한 ok
+~ ?
+
+
+09 18
+Is Locally Controlled = 이 폰이 내(로컬)가 조종하는 폰인지 확인 가능
+
+오른팔에서 라인 트레이스를 쏜다
+시작점 : get world location
+끝점 : get world location + forward로  *1000
+
+break hit result 로 맞은 엑터의 정보를 출력시킴
+
+코드에서 회전행렬사용
+
+9 19
+리소스 가져오기
+
+
+
+c++에서 액터 스폰
+팔 매시 만들어서 넣기
+블프로 한거 c++로 하기
+ 프레스 릴리즈 Fire버튼
+ 총 종류 넣기
+ AACtor *WeaponActor
+ GetWorld()->SpawnActor(종류, 위치, 스폰파라미터) 위치에 해당하는 값은 제로백터(identitiy(위치속성0 회전속성0)
+
+코드를 Super::BeginPlay 위로 해줘야 실행 순서가 맞음
+
+shoot -> 총의 발사 애니메이션, 캐릭터의 발사 애니메이션 같이 실행
+
+GetLifetimeReplicatedProps

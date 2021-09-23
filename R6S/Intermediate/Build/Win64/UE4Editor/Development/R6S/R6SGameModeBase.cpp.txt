@@ -1,0 +1,7 @@
+D:\R6S\Intermediate\Build\Win64\UE4Editor\Development\R6S\Definitions.R6S.h
+D:\R6S\Source\R6S\R6SGameModeBase.h
+D:\UnrealEngine\UE_4.27\Engine\Source\Runtime\Engine\Classes\GameFramework/GameModeBase.h
+D:\UnrealEngine\UE_4.27\Engine\Source\Runtime\Engine\Classes\Engine/ServerStatReplicator.h
+D:\UnrealEngine\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\ServerStatReplicator.generated.h
+D:\UnrealEngine\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\GameModeBase.generated.h
+D:\R6S\Intermediate\Build\Win64\UE4Editor\Inc\R6S\R6SGameModeBase.generated.h

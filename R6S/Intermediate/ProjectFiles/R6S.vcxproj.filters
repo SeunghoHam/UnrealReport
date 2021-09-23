@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <None Include="..\..\R6S.uproject" />
+    <Filter Include="Source">
+      <UniqueIdentifier>{B9FB3CA6-8E77-4854-AD4E-EFF919E88F96}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\R6S.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\..\Source\R6SEditor.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <Filter Include="Config">
+      <UniqueIdentifier>{AB522428-3507-41D5-A145-A7BEC44F0C9A}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Config\DefaultEditor.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultEngine.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultGame.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultInput.ini">
+      <Filter>Config</Filter>
+    </None>
+    <Filter Include="Source\R6S">
+      <UniqueIdentifier>{8C8493A7-4E3E-44A6-A47A-8ACC06FF633C}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\R6S\R6S.Build.cs">
+      <Filter>Source\R6S</Filter>
+    </None>
+    <ClCompile Include="..\..\Source\R6S\R6S.cpp">
+      <Filter>Source\R6S</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\R6S\R6S.h">
+      <Filter>Source\R6S</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\R6S\R6SGameModeBase.cpp">
+      <Filter>Source\R6S</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\R6S\R6SGameModeBase.h">
+      <Filter>Source\R6S</Filter>
+    </ClInclude>
+    <Filter Include="Source\R6S\Private">
+      <UniqueIdentifier>{CE3DBC24-4A29-4C90-B685-3C34ED413D30}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\R6S\Private\BaseCharacter.cpp">
+      <Filter>Source\R6S\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\R6S\Private\Gun.cpp">
+      <Filter>Source\R6S\Private</Filter>
+    </ClCompile>
+    <Filter Include="Source\R6S\Public">
+      <UniqueIdentifier>{60610185-EFF4-4834-9289-47631CED7D77}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Source\R6S\Public\BaseCharacter.h">
+      <Filter>Source\R6S\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\R6S\Public\Gun.h">
+      <Filter>Source\R6S\Public</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

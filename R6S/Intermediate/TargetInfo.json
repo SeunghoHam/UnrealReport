@@ -1,0 +1,14 @@
+{
+	"Targets": [
+		{
+			"Name": "R6S",
+			"Path": "D:\\R6S\\Source\\R6S.Target.cs",
+			"Type": "Game"
+		},
+		{
+			"Name": "R6SEditor",
+			"Path": "D:\\R6S\\Source\\R6SEditor.Target.cs",
+			"Type": "Editor"
+		}
+	]
+}

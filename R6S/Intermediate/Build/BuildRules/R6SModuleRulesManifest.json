@@ -1,0 +1,8 @@
+{
+	"SourceFiles": [
+		"D:\\R6S\\Source\\R6S\\R6S.Build.cs",
+		"D:\\R6S\\Source\\R6S.Target.cs",
+		"D:\\R6S\\Source\\R6SEditor.Target.cs"
+	],
+	"EngineVersion": "4.27.0"
+}
