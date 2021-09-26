@@ -1,5 +1,5 @@
-D:\R6S\Intermediate\Build\Win64\UE4Editor\Development\R6S\Definitions.R6S.h
+C:\Users\xldgh\Downloads\R6S\Intermediate\Build\Win64\UE4Editor\Development\R6S\Definitions.R6S.h
 D:\UnrealEngine\UE_4.27\Engine\Source\Runtime\CoreUObject\Public\UObject/GeneratedCppIncludes.h
 D:\UnrealEngine\UE_4.27\Engine\Source\Runtime\CoreUObject\Public\UObject/MetaData.h
-D:\R6S\Source\R6S/Public/Gun.h
-D:\R6S\Intermediate\Build\Win64\UE4Editor\Inc\R6S\Gun.generated.h
+C:\Users\xldgh\Downloads\R6S\Source\R6S/Public/Gun.h
+C:\Users\xldgh\Downloads\R6S\Intermediate\Build\Win64\UE4Editor\Inc\R6S\Gun.generated.h

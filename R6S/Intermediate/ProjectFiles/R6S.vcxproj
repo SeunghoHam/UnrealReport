@@ -51,7 +51,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{A5AE8488-4B99-4FE4-BEFB-6EE26D92DD91}</ProjectGuid>
+    <ProjectGuid>{97590706-ABC1-4D79-BA6B-2323AF1487A7}</ProjectGuid>
     <Keyword>MakeFileProj</Keyword>
     <RootNamespace>R6S</RootNamespace>
     <PlatformToolset>v142</PlatformToolset>

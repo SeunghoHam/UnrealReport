@@ -64,3 +64,26 @@ c++에서 액터 스폰
 shoot -> 총의 발사 애니메이션, 캐릭터의 발사 애니메이션 같이 실행
 
 GetLifetimeReplicatedProps
+
+Replicated :  이 변수를 서버-클라이언트 값을 동기화 하는 변수로 쓰겟다하는것
+
+
+(랩 노티파이)
+ReplicatedUsing : 복제가 되면 알린다.
+클라이언트에서 값이 도착하는 시점에서 함수를 호출한다.
+동기화 되는 시점을 어떻게 처리하냐
+
+
+9 26
+SetupWeapon 함수 : 
+총기를 셋업하는 과정은 OnRep_WeaponActor함수, OnSetupWeapon 이벤트에서 한다.
+
+실무에서는 // [Client + Server] 라는 식으로 주석을 달아서 코드 읽기를 쉽게 함
+맵 레벨 제작
+HasAuthority 조건문에 SetupWeapon 을 넣지 않으면 캐릭터가 이상하게 나온다.
+
+카메라 로테이션 고치기( 땅 볼때 원점을 기준으로 하는거 )
+
+c++로 라인트레이스 하고 맞은 지점 드로우 하기
+
+총 데미지 

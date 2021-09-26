@@ -3,17 +3,24 @@
 
 #include "BaseCharacter.h"
 #include "Net/UnrealNetwork.h"
+
 // Sets default values
 ABaseCharacter::ABaseCharacter()
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	MaxHealth = 100;
+	CurrentHealth = MaxHealth;
+
+
 }
 
 // Called when the game starts or when spawned
 void ABaseCharacter::BeginPlay()
 {
+
+
 	if (HasAuthority())
 	{
 		FActorSpawnParameters SpawnParameters;
@@ -24,6 +31,11 @@ void ABaseCharacter::BeginPlay()
 
 	Super::BeginPlay();
 
+	if (HasAuthority())
+	{
+		SetupWeapon();
+	}
+	/*
 	if (IsLocallyControlled())
 	{
 		bUseControllerRotationPitch = true;
@@ -32,9 +44,7 @@ void ABaseCharacter::BeginPlay()
 	{
 		bUseControllerRotationPitch = false;
 	}
-
-	
-	
+	*/
 }
 
 // Called every frame
@@ -63,9 +73,9 @@ void ABaseCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLi
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 
-	DOREPLIFETIME(ABaseCharacter, WeaponActor); // BaseCharacter에 해당하는 모든것을 복제해간다? 이거 찾아봐야되는냥오
-	 
+	DOREPLIFETIME(ABaseCharacter, WeaponActor);
 }
+
 
 void ABaseCharacter::MoveForward(float AxisValue)
 {
@@ -107,3 +117,35 @@ void ABaseCharacter::PressedFire()
 void ABaseCharacter::ReleasedFire()
 {
 }
+
+void ABaseCharacter::OnRep_WeaponActor()
+{
+	SetupWeapon();
+}
+
+void ABaseCharacter::SetupWeapon()
+{
+	OnSetupWeapon();
+}
+
+
+float ABaseCharacter::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
+{
+	CurrentHealth -= DamageAmount;
+
+	if (CurrentHealth <= 0)
+	{
+		// 사망처리
+		Die();
+	}
+	return Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
+}
+
+void ABaseCharacter::Die()
+{
+	OnDie();
+
+	Destroy();
+}
+
+

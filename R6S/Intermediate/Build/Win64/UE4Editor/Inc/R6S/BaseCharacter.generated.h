@@ -14,8 +14,16 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #define R6S_BaseCharacter_generated_h
 
 #define R6S_Source_R6S_Public_BaseCharacter_h_13_SPARSE_DATA
-#define R6S_Source_R6S_Public_BaseCharacter_h_13_RPC_WRAPPERS
-#define R6S_Source_R6S_Public_BaseCharacter_h_13_RPC_WRAPPERS_NO_PURE_DECLS
+#define R6S_Source_R6S_Public_BaseCharacter_h_13_RPC_WRAPPERS \
+ \
+	DECLARE_FUNCTION(execOnRep_WeaponActor);
+
+
+#define R6S_Source_R6S_Public_BaseCharacter_h_13_RPC_WRAPPERS_NO_PURE_DECLS \
+ \
+	DECLARE_FUNCTION(execOnRep_WeaponActor);
+
+
 #define R6S_Source_R6S_Public_BaseCharacter_h_13_EVENT_PARMS
 #define R6S_Source_R6S_Public_BaseCharacter_h_13_CALLBACK_WRAPPERS
 #define R6S_Source_R6S_Public_BaseCharacter_h_13_INCLASS_NO_PURE_DECLS \
@@ -25,7 +33,6 @@ private: \
 public: \
 	DECLARE_CLASS(ABaseCharacter, ACharacter, COMPILED_IN_FLAGS(0 | CLASS_Config), CASTCLASS_None, TEXT("/Script/R6S"), NO_API) \
 	DECLARE_SERIALIZER(ABaseCharacter) \
-	void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override; \
 	enum class ENetFields_Private : uint16 \
 	{ \
 		NETFIELD_REP_START=(uint16)((int32)Super::ENetFields_Private::NETFIELD_REP_END + (int32)1), \
@@ -41,7 +48,6 @@ private: \
 public: \
 	DECLARE_CLASS(ABaseCharacter, ACharacter, COMPILED_IN_FLAGS(0 | CLASS_Config), CASTCLASS_None, TEXT("/Script/R6S"), NO_API) \
 	DECLARE_SERIALIZER(ABaseCharacter) \
-	void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override; \
 	enum class ENetFields_Private : uint16 \
 	{ \
 		NETFIELD_REP_START=(uint16)((int32)Super::ENetFields_Private::NETFIELD_REP_END + (int32)1), \
@@ -75,7 +81,9 @@ public: \
 
 
 #define R6S_Source_R6S_Public_BaseCharacter_h_13_PRIVATE_PROPERTY_OFFSET \
-	FORCEINLINE static uint32 __PPO__WeaponActor() { return STRUCT_OFFSET(ABaseCharacter, WeaponActor); }
+	FORCEINLINE static uint32 __PPO__WeaponActor() { return STRUCT_OFFSET(ABaseCharacter, WeaponActor); } \
+	FORCEINLINE static uint32 __PPO__MaxHealth() { return STRUCT_OFFSET(ABaseCharacter, MaxHealth); } \
+	FORCEINLINE static uint32 __PPO__CurrentHealth() { return STRUCT_OFFSET(ABaseCharacter, CurrentHealth); }
 
 
 #define R6S_Source_R6S_Public_BaseCharacter_h_10_PROLOG \

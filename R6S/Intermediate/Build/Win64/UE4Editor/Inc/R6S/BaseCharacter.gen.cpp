@@ -21,13 +21,57 @@ void EmptyLinkFunctionForGeneratedCodeBaseCharacter() {}
 	R6S_API UClass* Z_Construct_UClass_AGun_NoRegister();
 	ENGINE_API UClass* Z_Construct_UClass_AActor_NoRegister();
 // End Cross Module References
+	DEFINE_FUNCTION(ABaseCharacter::execOnRep_WeaponActor)
+	{
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->OnRep_WeaponActor();
+		P_NATIVE_END;
+	}
+	static FName NAME_ABaseCharacter_OnDie = FName(TEXT("OnDie"));
+	void ABaseCharacter::OnDie()
+	{
+		ProcessEvent(FindFunctionChecked(NAME_ABaseCharacter_OnDie),NULL);
+	}
 	static FName NAME_ABaseCharacter_OnPressedFire = FName(TEXT("OnPressedFire"));
 	void ABaseCharacter::OnPressedFire()
 	{
 		ProcessEvent(FindFunctionChecked(NAME_ABaseCharacter_OnPressedFire),NULL);
 	}
+	static FName NAME_ABaseCharacter_OnSetupWeapon = FName(TEXT("OnSetupWeapon"));
+	void ABaseCharacter::OnSetupWeapon()
+	{
+		ProcessEvent(FindFunctionChecked(NAME_ABaseCharacter_OnSetupWeapon),NULL);
+	}
 	void ABaseCharacter::StaticRegisterNativesABaseCharacter()
 	{
+		UClass* Class = ABaseCharacter::StaticClass();
+		static const FNameNativePtrPair Funcs[] = {
+			{ "OnRep_WeaponActor", &ABaseCharacter::execOnRep_WeaponActor },
+		};
+		FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
+	}
+	struct Z_Construct_UFunction_ABaseCharacter_OnDie_Statics
+	{
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UE4CodeGen_Private::FFunctionParams FuncParams;
+	};
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_ABaseCharacter_OnDie_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "Public/BaseCharacter.h" },
+	};
+#endif
+	const UE4CodeGen_Private::FFunctionParams Z_Construct_UFunction_ABaseCharacter_OnDie_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_ABaseCharacter, nullptr, "OnDie", nullptr, nullptr, 0, nullptr, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x08020800, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_ABaseCharacter_OnDie_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_ABaseCharacter_OnDie_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_ABaseCharacter_OnDie()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UE4CodeGen_Private::ConstructUFunction(ReturnFunction, Z_Construct_UFunction_ABaseCharacter_OnDie_Statics::FuncParams);
+		}
+		return ReturnFunction;
 	}
 	struct Z_Construct_UFunction_ABaseCharacter_OnPressedFire_Statics
 	{
@@ -51,6 +95,50 @@ void EmptyLinkFunctionForGeneratedCodeBaseCharacter() {}
 		}
 		return ReturnFunction;
 	}
+	struct Z_Construct_UFunction_ABaseCharacter_OnRep_WeaponActor_Statics
+	{
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UE4CodeGen_Private::FFunctionParams FuncParams;
+	};
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_ABaseCharacter_OnRep_WeaponActor_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "Public/BaseCharacter.h" },
+	};
+#endif
+	const UE4CodeGen_Private::FFunctionParams Z_Construct_UFunction_ABaseCharacter_OnRep_WeaponActor_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_ABaseCharacter, nullptr, "OnRep_WeaponActor", nullptr, nullptr, 0, nullptr, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00080400, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_ABaseCharacter_OnRep_WeaponActor_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_ABaseCharacter_OnRep_WeaponActor_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_ABaseCharacter_OnRep_WeaponActor()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UE4CodeGen_Private::ConstructUFunction(ReturnFunction, Z_Construct_UFunction_ABaseCharacter_OnRep_WeaponActor_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_ABaseCharacter_OnSetupWeapon_Statics
+	{
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UE4CodeGen_Private::FFunctionParams FuncParams;
+	};
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_ABaseCharacter_OnSetupWeapon_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "Public/BaseCharacter.h" },
+	};
+#endif
+	const UE4CodeGen_Private::FFunctionParams Z_Construct_UFunction_ABaseCharacter_OnSetupWeapon_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_ABaseCharacter, nullptr, "OnSetupWeapon", nullptr, nullptr, 0, nullptr, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x08080800, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_ABaseCharacter_OnSetupWeapon_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_ABaseCharacter_OnSetupWeapon_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_ABaseCharacter_OnSetupWeapon()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UE4CodeGen_Private::ConstructUFunction(ReturnFunction, Z_Construct_UFunction_ABaseCharacter_OnSetupWeapon_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
 	UClass* Z_Construct_UClass_ABaseCharacter_NoRegister()
 	{
 		return ABaseCharacter::StaticClass();
@@ -70,6 +158,14 @@ void EmptyLinkFunctionForGeneratedCodeBaseCharacter() {}
 		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_WeaponActor_MetaData[];
 #endif
 		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_WeaponActor;
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_MaxHealth_MetaData[];
+#endif
+		static const UE4CodeGen_Private::FUnsizedIntPropertyParams NewProp_MaxHealth;
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_CurrentHealth_MetaData[];
+#endif
+		static const UE4CodeGen_Private::FUnsizedIntPropertyParams NewProp_CurrentHealth;
 		static const UE4CodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UE4CodeGen_Private::FClassParams ClassParams;
@@ -79,7 +175,10 @@ void EmptyLinkFunctionForGeneratedCodeBaseCharacter() {}
 		(UObject* (*)())Z_Construct_UPackage__Script_R6S,
 	};
 	const FClassFunctionLinkInfo Z_Construct_UClass_ABaseCharacter_Statics::FuncInfo[] = {
+		{ &Z_Construct_UFunction_ABaseCharacter_OnDie, "OnDie" }, // 1155663651
 		{ &Z_Construct_UFunction_ABaseCharacter_OnPressedFire, "OnPressedFire" }, // 560522349
+		{ &Z_Construct_UFunction_ABaseCharacter_OnRep_WeaponActor, "OnRep_WeaponActor" }, // 141110893
+		{ &Z_Construct_UFunction_ABaseCharacter_OnSetupWeapon, "OnSetupWeapon" }, // 4274939853
 	};
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ABaseCharacter_Statics::Class_MetaDataParams[] = {
@@ -98,15 +197,33 @@ void EmptyLinkFunctionForGeneratedCodeBaseCharacter() {}
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ABaseCharacter_Statics::NewProp_WeaponActor_MetaData[] = {
 		{ "Category", "BaseCharacter" },
-		{ "Comment", "// Replicated = ?? ?????? ????-\xc5\xac???\xcc\xbe?\xc6\xae ???? ????\xc8\xad ?\xcf\xb4? ?????? ???\xd9\xb4??\xcf\xb4\xc2\xb0?\n" },
 		{ "ModuleRelativePath", "Public/BaseCharacter.h" },
-		{ "ToolTip", "Replicated = ?? ?????? ????-\xc5\xac???\xcc\xbe?\xc6\xae ???? ????\xc8\xad ?\xcf\xb4? ?????? ???\xd9\xb4??\xcf\xb4\xc2\xb0?" },
 	};
 #endif
-	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ABaseCharacter_Statics::NewProp_WeaponActor = { "WeaponActor", nullptr, (EPropertyFlags)0x0020080000000024, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ABaseCharacter, WeaponActor), Z_Construct_UClass_AActor_NoRegister, METADATA_PARAMS(Z_Construct_UClass_ABaseCharacter_Statics::NewProp_WeaponActor_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ABaseCharacter_Statics::NewProp_WeaponActor_MetaData)) };
+	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ABaseCharacter_Statics::NewProp_WeaponActor = { "WeaponActor", "OnRep_WeaponActor", (EPropertyFlags)0x0020080100000024, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ABaseCharacter, WeaponActor), Z_Construct_UClass_AActor_NoRegister, METADATA_PARAMS(Z_Construct_UClass_ABaseCharacter_Statics::NewProp_WeaponActor_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ABaseCharacter_Statics::NewProp_WeaponActor_MetaData)) };
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ABaseCharacter_Statics::NewProp_MaxHealth_MetaData[] = {
+		{ "Category", "BaseCharacter" },
+		{ "Comment", "/*\xec\xb5\x9c\xeb\x8c\x80\xec\xb2\xb4\xeb\xa0\xa5*/" },
+		{ "ModuleRelativePath", "Public/BaseCharacter.h" },
+		{ "ToolTip", "\xec\xb5\x9c\xeb\x8c\x80\xec\xb2\xb4\xeb\xa0\xa5" },
+	};
+#endif
+	const UE4CodeGen_Private::FUnsizedIntPropertyParams Z_Construct_UClass_ABaseCharacter_Statics::NewProp_MaxHealth = { "MaxHealth", nullptr, (EPropertyFlags)0x0020080000000004, UE4CodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ABaseCharacter, MaxHealth), METADATA_PARAMS(Z_Construct_UClass_ABaseCharacter_Statics::NewProp_MaxHealth_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ABaseCharacter_Statics::NewProp_MaxHealth_MetaData)) };
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ABaseCharacter_Statics::NewProp_CurrentHealth_MetaData[] = {
+		{ "Category", "BaseCharacter" },
+		{ "Comment", "/*\xed\x98\x84\xec\x9e\xac\xec\xb2\xb4\xeb\xa0\xa5*/" },
+		{ "ModuleRelativePath", "Public/BaseCharacter.h" },
+		{ "ToolTip", "\xed\x98\x84\xec\x9e\xac\xec\xb2\xb4\xeb\xa0\xa5" },
+	};
+#endif
+	const UE4CodeGen_Private::FUnsizedIntPropertyParams Z_Construct_UClass_ABaseCharacter_Statics::NewProp_CurrentHealth = { "CurrentHealth", nullptr, (EPropertyFlags)0x0020080000000004, UE4CodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ABaseCharacter, CurrentHealth), METADATA_PARAMS(Z_Construct_UClass_ABaseCharacter_Statics::NewProp_CurrentHealth_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ABaseCharacter_Statics::NewProp_CurrentHealth_MetaData)) };
 	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_ABaseCharacter_Statics::PropPointers[] = {
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABaseCharacter_Statics::NewProp_EquipGunType,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABaseCharacter_Statics::NewProp_WeaponActor,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABaseCharacter_Statics::NewProp_MaxHealth,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABaseCharacter_Statics::NewProp_CurrentHealth,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_ABaseCharacter_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<ABaseCharacter>::IsAbstract,
@@ -135,7 +252,7 @@ void EmptyLinkFunctionForGeneratedCodeBaseCharacter() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(ABaseCharacter, 770330747);
+	IMPLEMENT_CLASS(ABaseCharacter, 3860720531);
 	template<> R6S_API UClass* StaticClass<ABaseCharacter>()
 	{
 		return ABaseCharacter::StaticClass();

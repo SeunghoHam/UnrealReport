@@ -8,6 +8,7 @@
 #include "UObject/ScriptMacros.h"
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
+struct FVector;
 #ifdef R6S_Gun_generated_h
 #error "Gun.generated.h already included, missing '#pragma once' in Gun.h"
 #endif
@@ -15,18 +16,34 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 
 #define R6S_Source_R6S_Public_Gun_h_12_SPARSE_DATA
 #define R6S_Source_R6S_Public_Gun_h_12_RPC_WRAPPERS \
+	virtual FVector GetMuzzleLocation_Implementation() const; \
 	virtual void ServerFire_Implementation(); \
  \
+	DECLARE_FUNCTION(execGetMuzzleLocation); \
 	DECLARE_FUNCTION(execServerFire);
 
 
 #define R6S_Source_R6S_Public_Gun_h_12_RPC_WRAPPERS_NO_PURE_DECLS \
+	virtual FVector GetMuzzleLocation_Implementation() const; \
 	virtual void ServerFire_Implementation(); \
  \
+	DECLARE_FUNCTION(execGetMuzzleLocation); \
 	DECLARE_FUNCTION(execServerFire);
 
 
-#define R6S_Source_R6S_Public_Gun_h_12_EVENT_PARMS
+#define R6S_Source_R6S_Public_Gun_h_12_EVENT_PARMS \
+	struct Gun_eventGetMuzzleLocation_Parms \
+	{ \
+		FVector ReturnValue; \
+ \
+		/** Constructor, initializes return property only **/ \
+		Gun_eventGetMuzzleLocation_Parms() \
+			: ReturnValue(ForceInit) \
+		{ \
+		} \
+	};
+
+
 #define R6S_Source_R6S_Public_Gun_h_12_CALLBACK_WRAPPERS
 #define R6S_Source_R6S_Public_Gun_h_12_INCLASS_NO_PURE_DECLS \
 private: \
