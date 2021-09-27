@@ -3,7 +3,7 @@
   <ItemGroup>
     <None Include="..\..\R6S.uproject" />
     <Filter Include="Source">
-      <UniqueIdentifier>{18B7C5A6-07D4-4242-8DD0-88676219507D}</UniqueIdentifier>
+      <UniqueIdentifier>{E77685A9-42A1-4173-86C6-91CDBBEE3CE7}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\Source\R6S.Target.cs">
       <Filter>Source</Filter>
@@ -12,7 +12,7 @@
       <Filter>Source</Filter>
     </None>
     <Filter Include="Config">
-      <UniqueIdentifier>{819681B5-D11D-43EB-B5EB-38781B311527}</UniqueIdentifier>
+      <UniqueIdentifier>{C2E54B8C-BABD-4080-B10B-BE6E798B19F6}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\Config\DefaultEditor.ini">
       <Filter>Config</Filter>
@@ -27,7 +27,7 @@
       <Filter>Config</Filter>
     </None>
     <Filter Include="Source\R6S">
-      <UniqueIdentifier>{D28BE3B2-1DC0-481A-8379-CEDA6EEE5F7F}</UniqueIdentifier>
+      <UniqueIdentifier>{C5533852-7F4A-4C13-AC40-79F2241A09EB}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\Source\R6S\R6S.Build.cs">
       <Filter>Source\R6S</Filter>
@@ -45,7 +45,7 @@
       <Filter>Source\R6S</Filter>
     </ClInclude>
     <Filter Include="Source\R6S\Private">
-      <UniqueIdentifier>{1541EE3C-5EB5-4FFC-9A82-07394D603D29}</UniqueIdentifier>
+      <UniqueIdentifier>{24A5E943-B89E-4226-88BF-1F4B4932CE97}</UniqueIdentifier>
     </Filter>
     <ClCompile Include="..\..\Source\R6S\Private\BaseCharacter.cpp">
       <Filter>Source\R6S\Private</Filter>
@@ -54,7 +54,7 @@
       <Filter>Source\R6S\Private</Filter>
     </ClCompile>
     <Filter Include="Source\R6S\Public">
-      <UniqueIdentifier>{E9B650E0-2350-4930-B635-4E5FB214FE86}</UniqueIdentifier>
+      <UniqueIdentifier>{DFFA76A1-BDB4-4A9A-8A6A-063C5E9065CC}</UniqueIdentifier>
     </Filter>
     <ClInclude Include="..\..\Source\R6S\Public\BaseCharacter.h">
       <Filter>Source\R6S\Public</Filter>
