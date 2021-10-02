@@ -2,12 +2,12 @@
 	"Targets": [
 		{
 			"Name": "R6S",
-			"Path": "C:\\Users\\xldgh\\Desktop\\UnrealReport\\R6S\\Source\\R6S.Target.cs",
+			"Path": "D:\\UnrealReport\\R6S\\Source\\R6S.Target.cs",
 			"Type": "Game"
 		},
 		{
 			"Name": "R6SEditor",
-			"Path": "C:\\Users\\xldgh\\Desktop\\UnrealReport\\R6S\\Source\\R6SEditor.Target.cs",
+			"Path": "D:\\UnrealReport\\R6S\\Source\\R6SEditor.Target.cs",
 			"Type": "Editor"
 		}
 	]

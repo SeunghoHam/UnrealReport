@@ -26,6 +26,13 @@ void EmptyLinkFunctionForGeneratedCodeGun() {}
 		*(FVector*)Z_Param__Result=P_THIS->GetMuzzleLocation_Implementation();
 		P_NATIVE_END;
 	}
+	DEFINE_FUNCTION(AGun::execMulticastFire)
+	{
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->MulticastFire_Implementation();
+		P_NATIVE_END;
+	}
 	DEFINE_FUNCTION(AGun::execServerFire)
 	{
 		P_FINISH;
@@ -39,6 +46,11 @@ void EmptyLinkFunctionForGeneratedCodeGun() {}
 		Gun_eventGetMuzzleLocation_Parms Parms;
 		const_cast<AGun*>(this)->ProcessEvent(FindFunctionChecked(NAME_AGun_GetMuzzleLocation),&Parms);
 		return Parms.ReturnValue;
+	}
+	static FName NAME_AGun_MulticastFire = FName(TEXT("MulticastFire"));
+	void AGun::MulticastFire()
+	{
+		ProcessEvent(FindFunctionChecked(NAME_AGun_MulticastFire),NULL);
 	}
 	static FName NAME_AGun_OnFire = FName(TEXT("OnFire"));
 	void AGun::OnFire()
@@ -60,6 +72,7 @@ void EmptyLinkFunctionForGeneratedCodeGun() {}
 		UClass* Class = AGun::StaticClass();
 		static const FNameNativePtrPair Funcs[] = {
 			{ "GetMuzzleLocation", &AGun::execGetMuzzleLocation },
+			{ "MulticastFire", &AGun::execMulticastFire },
 			{ "ServerFire", &AGun::execServerFire },
 		};
 		FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
@@ -91,6 +104,28 @@ void EmptyLinkFunctionForGeneratedCodeGun() {}
 		if (!ReturnFunction)
 		{
 			UE4CodeGen_Private::ConstructUFunction(ReturnFunction, Z_Construct_UFunction_AGun_GetMuzzleLocation_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_AGun_MulticastFire_Statics
+	{
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UE4CodeGen_Private::FFunctionParams FuncParams;
+	};
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AGun_MulticastFire_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "Public/Gun.h" },
+	};
+#endif
+	const UE4CodeGen_Private::FFunctionParams Z_Construct_UFunction_AGun_MulticastFire_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AGun, nullptr, "MulticastFire", nullptr, nullptr, 0, nullptr, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00024CC0, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_AGun_MulticastFire_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_AGun_MulticastFire_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_AGun_MulticastFire()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UE4CodeGen_Private::ConstructUFunction(ReturnFunction, Z_Construct_UFunction_AGun_MulticastFire_Statics::FuncParams);
 		}
 		return ReturnFunction;
 	}
@@ -185,6 +220,7 @@ void EmptyLinkFunctionForGeneratedCodeGun() {}
 	};
 	const FClassFunctionLinkInfo Z_Construct_UClass_AGun_Statics::FuncInfo[] = {
 		{ &Z_Construct_UFunction_AGun_GetMuzzleLocation, "GetMuzzleLocation" }, // 4175206262
+		{ &Z_Construct_UFunction_AGun_MulticastFire, "MulticastFire" }, // 2226800594
 		{ &Z_Construct_UFunction_AGun_OnFire, "OnFire" }, // 162105550
 		{ &Z_Construct_UFunction_AGun_OnServerFire, "OnServerFire" }, // 2657188954
 		{ &Z_Construct_UFunction_AGun_ServerFire, "ServerFire" }, // 4084818164
@@ -234,7 +270,7 @@ void EmptyLinkFunctionForGeneratedCodeGun() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(AGun, 1916480164);
+	IMPLEMENT_CLASS(AGun, 876104977);
 	template<> R6S_API UClass* StaticClass<AGun>()
 	{
 		return AGun::StaticClass();

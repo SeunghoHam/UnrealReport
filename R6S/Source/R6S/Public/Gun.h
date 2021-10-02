@@ -34,6 +34,9 @@ public:
 	UFUNCTION(BlueprintImplementableEvent)
 	void OnServerFire();
 
+	UFUNCTION(NetMulticast, Reliable)
+	void MulticastFire();
+
 	/* 총알이 발사될 위치 반환 */
 	UFUNCTION(BlueprintNativeEvent)
 	FVector GetMuzzleLocation() const;

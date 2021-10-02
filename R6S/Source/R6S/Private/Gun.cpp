@@ -33,6 +33,19 @@ FVector AGun::GetMuzzleLocation_Implementation() const
 	return GetActorLocation();
 }
 
+// 서버에서 실행. Multicast함수는 서버에서 실행시켜야 유효하다.
+
+/*void AGun::MulticastFire_Implementation()
+{
+	if (GetOwner()->HasAuthority() && GetOwner()->GetLocalRole() == ENetRole::ROLE_SimulatedProxy)
+	{
+		Fire();
+	}
+	
+}*/
+
+
+
 // Called when the game starts or when spawned
 void AGun::BeginPlay()
 {
@@ -48,7 +61,9 @@ void AGun::Tick(float DeltaTime)
 
 void AGun::ServerFire_Implementation()
 {
+	MulticastFire();
 	UE_LOG(LogTemp, Log, TEXT("Im ServerFire"));
+
 
 	// 실제 발사할 시작 위치
 	FVector StartFireLocation; // Line Trace 시작 위치
@@ -100,4 +115,12 @@ void AGun::ServerFire_Implementation()
 	}
 
 	OnServerFire();
+}
+
+void AGun::MulticastFire_Implementation()
+{
+	if (!GetOwner()->HasAuthority() && GetOwner()->GetLocalRole() == ENetRole::ROLE_SimulatedProxy)
+	{
+		Fire();
+	}
 }

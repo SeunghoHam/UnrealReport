@@ -17,17 +17,21 @@ struct FVector;
 #define R6S_Source_R6S_Public_Gun_h_12_SPARSE_DATA
 #define R6S_Source_R6S_Public_Gun_h_12_RPC_WRAPPERS \
 	virtual FVector GetMuzzleLocation_Implementation() const; \
+	virtual void MulticastFire_Implementation(); \
 	virtual void ServerFire_Implementation(); \
  \
 	DECLARE_FUNCTION(execGetMuzzleLocation); \
+	DECLARE_FUNCTION(execMulticastFire); \
 	DECLARE_FUNCTION(execServerFire);
 
 
 #define R6S_Source_R6S_Public_Gun_h_12_RPC_WRAPPERS_NO_PURE_DECLS \
 	virtual FVector GetMuzzleLocation_Implementation() const; \
+	virtual void MulticastFire_Implementation(); \
 	virtual void ServerFire_Implementation(); \
  \
 	DECLARE_FUNCTION(execGetMuzzleLocation); \
+	DECLARE_FUNCTION(execMulticastFire); \
 	DECLARE_FUNCTION(execServerFire);
 
 
