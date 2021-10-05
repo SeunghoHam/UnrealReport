@@ -16,11 +16,13 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #define R6S_Source_R6S_Public_BaseCharacter_h_13_SPARSE_DATA
 #define R6S_Source_R6S_Public_BaseCharacter_h_13_RPC_WRAPPERS \
  \
+	DECLARE_FUNCTION(execOnRep_IsDead); \
 	DECLARE_FUNCTION(execOnRep_WeaponActor);
 
 
 #define R6S_Source_R6S_Public_BaseCharacter_h_13_RPC_WRAPPERS_NO_PURE_DECLS \
  \
+	DECLARE_FUNCTION(execOnRep_IsDead); \
 	DECLARE_FUNCTION(execOnRep_WeaponActor);
 
 
@@ -37,7 +39,8 @@ public: \
 	{ \
 		NETFIELD_REP_START=(uint16)((int32)Super::ENetFields_Private::NETFIELD_REP_END + (int32)1), \
 		WeaponActor=NETFIELD_REP_START, \
-		NETFIELD_REP_END=WeaponActor	}; \
+		IseDead, \
+		NETFIELD_REP_END=IseDead	}; \
 	NO_API virtual void ValidateGeneratedRepEnums(const TArray<struct FRepRecord>& ClassReps) const override;
 
 
@@ -52,7 +55,8 @@ public: \
 	{ \
 		NETFIELD_REP_START=(uint16)((int32)Super::ENetFields_Private::NETFIELD_REP_END + (int32)1), \
 		WeaponActor=NETFIELD_REP_START, \
-		NETFIELD_REP_END=WeaponActor	}; \
+		IseDead, \
+		NETFIELD_REP_END=IseDead	}; \
 	NO_API virtual void ValidateGeneratedRepEnums(const TArray<struct FRepRecord>& ClassReps) const override;
 
 
@@ -83,7 +87,8 @@ public: \
 #define R6S_Source_R6S_Public_BaseCharacter_h_13_PRIVATE_PROPERTY_OFFSET \
 	FORCEINLINE static uint32 __PPO__WeaponActor() { return STRUCT_OFFSET(ABaseCharacter, WeaponActor); } \
 	FORCEINLINE static uint32 __PPO__MaxHealth() { return STRUCT_OFFSET(ABaseCharacter, MaxHealth); } \
-	FORCEINLINE static uint32 __PPO__CurrentHealth() { return STRUCT_OFFSET(ABaseCharacter, CurrentHealth); }
+	FORCEINLINE static uint32 __PPO__CurrentHealth() { return STRUCT_OFFSET(ABaseCharacter, CurrentHealth); } \
+	FORCEINLINE static uint32 __PPO__IseDead() { return STRUCT_OFFSET(ABaseCharacter, IseDead); }
 
 
 #define R6S_Source_R6S_Public_BaseCharacter_h_10_PROLOG \

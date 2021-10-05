@@ -70,7 +70,8 @@ GetLifetimeReplicatedProps
 
 Replicated :  이 변수를 서버-클라이언트 값을 동기화 하는 변수로 쓰겟다하는것
 
-
+REplicatedUsing=OnRep_~ : 변수동기화가 되었을때 특정 함수를 호출하는 기능
+함수가 동기화 되는 시점에 ~함수를 호출하겠다.
 (랩 노티파이)
 ReplicatedUsing : 복제가 되면 알린다.
 클라이언트에서 값이 도착하는 시점에서 함수를 호출한다.
@@ -127,3 +128,9 @@ UpperBody 슬롯 만들기
 
 RPC : 특정 상황, 단발성 이벤트를 위한 동기화 기법
 변수동기화(replicated) : 지속성 있는 동기화가 필요할 때 
+
+
+10 03
+Aim 애니메이션 워크셋
+사운드 재생
+Fire 부분 고치기

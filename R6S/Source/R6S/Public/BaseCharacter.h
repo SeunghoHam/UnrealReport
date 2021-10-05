@@ -33,7 +33,14 @@ public:
 
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 	
-	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser) override;
+	virtual float TakeDamage(float DamageAmount, 
+		struct FDamageEvent const& DamageEvent, 
+		class AController* EventInstigator, 
+		AActor* DamageCauser) override;
+
+
+
+	
 	void Damage(int Damage) { CurrentHealth -= Damage; }
 	int GetCurrentHealth() const { return CurrentHealth; }
 
@@ -42,6 +49,7 @@ public:
 
 	UFUNCTION(BlueprintImplementableEvent)
 	void OnDie();
+
 protected:
 	void MoveForward(float AxisValue);
 
@@ -66,8 +74,10 @@ protected:
 
 	UFUNCTION(BlueprintImplementableEvent)
 	void OnSetupWeapon();
-
-
+	
+	UFUNCTION()
+	void OnRep_IsDead();
+	 
 protected:
 	UPROPERTY(BlueprintReadWrite, ReplicatedUsing=OnRep_WeaponActor)
 	AActor* WeaponActor;
@@ -79,4 +89,8 @@ protected:
 	/*현재체력*/
 	UPROPERTY(BlueprintReadWrite)
 	int CurrentHealth;
+
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing=OnRep_IsDead)
+	bool IseDead;
 };
+ 

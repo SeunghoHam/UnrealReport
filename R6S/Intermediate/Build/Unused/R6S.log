@@ -1,30 +1,18 @@
 ﻿  Using 'git status' to determine working set for adaptive non-unity build (D:\UnrealReport).
-  Deleted hot-reload file: D:\UnrealReport\R6S\Binaries\Win64\UE4Editor-R6S-0002.dll
-  Deleted hot-reload file: D:\UnrealReport\R6S\Binaries\Win64\UE4Editor-R6S-0002.pdb
-  Deleted hot-reload file: D:\UnrealReport\R6S\Binaries\Win64\UE4Editor-R6S-0003.dll
-  Deleted hot-reload file: D:\UnrealReport\R6S\Binaries\Win64\UE4Editor-R6S-0003.pdb
-  Deleted hot-reload file: D:\UnrealReport\R6S\Binaries\Win64\UE4Editor-R6S-0004.dll
-  Deleted hot-reload file: D:\UnrealReport\R6S\Binaries\Win64\UE4Editor-R6S-0004.pdb
-  Deleted hot-reload file: D:\UnrealReport\R6S\Binaries\Win64\UE4Editor-R6S-0005.dll
-  Deleted hot-reload file: D:\UnrealReport\R6S\Binaries\Win64\UE4Editor-R6S-0005.pdb
-  Deleted hot-reload file: D:\UnrealReport\R6S\Binaries\Win64\UE4Editor-R6S-0006.dll
-  Deleted hot-reload file: D:\UnrealReport\R6S\Binaries\Win64\UE4Editor-R6S-0006.pdb
-  Deleted hot-reload file: D:\UnrealReport\R6S\Binaries\Win64\UE4Editor-R6S-0007.dll
-  Deleted hot-reload file: D:\UnrealReport\R6S\Binaries\Win64\UE4Editor-R6S-0007.pdb
-  Deleted hot-reload file: D:\UnrealReport\R6S\Intermediate\Build\Win64\UE4Editor\Development\R6S\UE4Editor-R6S-0002.lib
-  Deleted hot-reload file: D:\UnrealReport\R6S\Intermediate\Build\Win64\UE4Editor\Development\R6S\UE4Editor-R6S-0003.lib
-  Deleted hot-reload file: D:\UnrealReport\R6S\Intermediate\Build\Win64\UE4Editor\Development\R6S\UE4Editor-R6S-0004.lib
-  Deleted hot-reload file: D:\UnrealReport\R6S\Intermediate\Build\Win64\UE4Editor\Development\R6S\UE4Editor-R6S-0005.lib
-  Deleted hot-reload file: D:\UnrealReport\R6S\Intermediate\Build\Win64\UE4Editor\Development\R6S\UE4Editor-R6S-0006.lib
-  Deleted hot-reload file: D:\UnrealReport\R6S\Intermediate\Build\Win64\UE4Editor\Development\R6S\UE4Editor-R6S-0007.lib
+  Parsing headers for R6SEditor
+    Running UnrealHeaderTool "D:\UnrealReport\R6S\R6S.uproject" "D:\UnrealReport\R6S\Intermediate\Build\Win64\R6SEditor\Development\R6SEditor.uhtmanifest" -LogCmds="loginit warning, logexit warning, logdatabase error" -Unattended -WarningsAsErrors -abslog="C:\Users\xldgh\AppData\Local\UnrealBuildTool\Log_UHT.txt" -installed
+  LogInit: Display: Loading text-based GConfig....
+  Reflection code generated for R6SEditor in 3.0740259 seconds
   Building R6SEditor...
   Using Visual Studio 2019 14.29.30040 toolchain (C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30037) and Windows 10.0.18362.0 SDK (C:\Program Files (x86)\Windows Kits\10).
-  Building 4 actions with 8 processes...
-    [1/4] Gun.cpp
-    [2/4] UE4Editor-R6S.lib
-       D:\UnrealReport\R6S\Intermediate\Build\Win64\UE4Editor\Development\R6S\UE4Editor-R6S.lib 라이브러리 및 D:\UnrealReport\R6S\Intermediate\Build\Win64\UE4Editor\Development\R6S\UE4Editor-R6S.exp 개체를 생성하고 있습니다.
-    [3/4] UE4Editor-R6S.dll
-       D:\UnrealReport\R6S\Intermediate\Build\Win64\UE4Editor\Development\R6S\UE4Editor-R6S.suppressed.lib 라이브러리 및 D:\UnrealReport\R6S\Intermediate\Build\Win64\UE4Editor\Development\R6S\UE4Editor-R6S.suppressed.exp 개체를 생성하고 있습니다.
-    [4/4] R6SEditor.target
-  Total time in Parallel executor: 1.23 seconds
-  Total execution time: 1.79 seconds
+  Building 6 actions with 8 processes...
+    [1/6] BaseCharacter.gen.cpp
+    [2/6] Gun.cpp
+    [3/6] BaseCharacter.cpp
+    [4/6] UE4Editor-R6S-0008.lib
+       D:\UnrealReport\R6S\Intermediate\Build\Win64\UE4Editor\Development\R6S\UE4Editor-R6S-0008.lib 라이브러리 및 D:\UnrealReport\R6S\Intermediate\Build\Win64\UE4Editor\Development\R6S\UE4Editor-R6S-0008.exp 개체를 생성하고 있습니다.
+    [5/6] UE4Editor-R6S-0008.dll
+       D:\UnrealReport\R6S\Intermediate\Build\Win64\UE4Editor\Development\R6S\UE4Editor-R6S-0008.suppressed.lib 라이브러리 및 D:\UnrealReport\R6S\Intermediate\Build\Win64\UE4Editor\Development\R6S\UE4Editor-R6S-0008.suppressed.exp 개체를 생성하고 있습니다.
+    [6/6] R6SEditor.target
+  Total time in Parallel executor: 5.08 seconds
+  Total execution time: 8.76 seconds

@@ -12,15 +12,11 @@ ABaseCharacter::ABaseCharacter()
 
 	MaxHealth = 100;
 	CurrentHealth = MaxHealth;
-
-
 }
 
 // Called when the game starts or when spawned
 void ABaseCharacter::BeginPlay()
 {
-
-
 	if (HasAuthority())
 	{
 		FActorSpawnParameters SpawnParameters;
@@ -74,9 +70,10 @@ void ABaseCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLi
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 
 	DOREPLIFETIME(ABaseCharacter, WeaponActor);
+	DOREPLIFETIME(ABaseCharacter, IseDead);
 }
 
-
+ 
 void ABaseCharacter::MoveForward(float AxisValue)
 {
 	FRotator ControlRotation = FRotator(0, GetControlRotation().Yaw, 0);
@@ -123,6 +120,7 @@ void ABaseCharacter::OnRep_WeaponActor()
 	SetupWeapon();
 }
 
+
 void ABaseCharacter::SetupWeapon()
 {
 	OnSetupWeapon();
@@ -135,17 +133,23 @@ float ABaseCharacter::TakeDamage(float DamageAmount, FDamageEvent const& DamageE
 
 	if (CurrentHealth <= 0)
 	{
-		// »ç¸ÁÃ³¸®
 		Die();
 	}
 	return Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
 }
+ 
+void ABaseCharacter::OnRep_IsDead()
+{
+	if(HasAuthority()== false)
+	{
+		Die();
+	}
+}
 
 void ABaseCharacter::Die()
 {
-	OnDie();
-
-	Destroy();
+	OnDie(); 
 }
+
 
 
