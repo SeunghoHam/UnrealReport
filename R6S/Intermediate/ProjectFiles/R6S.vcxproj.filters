@@ -3,7 +3,7 @@
   <ItemGroup>
     <None Include="..\..\R6S.uproject" />
     <Filter Include="Source">
-      <UniqueIdentifier>{F4A9C930-3E5A-45B9-9F59-158EEFD7B3A6}</UniqueIdentifier>
+      <UniqueIdentifier>{62F83548-CB9B-461B-B3A1-7DB83CAB07FE}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\Source\R6S.Target.cs">
       <Filter>Source</Filter>
@@ -12,7 +12,7 @@
       <Filter>Source</Filter>
     </None>
     <Filter Include="Config">
-      <UniqueIdentifier>{F502CC76-A8D2-47CD-B78C-2866A4D2DB76}</UniqueIdentifier>
+      <UniqueIdentifier>{13889AC6-9E42-47B6-8BDA-F2D08E45A679}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\Config\DefaultEditor.ini">
       <Filter>Config</Filter>
@@ -27,7 +27,7 @@
       <Filter>Config</Filter>
     </None>
     <Filter Include="Source\R6S">
-      <UniqueIdentifier>{51840BB3-B907-40C0-A1ED-D37831FE8AED}</UniqueIdentifier>
+      <UniqueIdentifier>{DE00BBCB-4B07-478E-AFCA-70B7AC884BE2}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\Source\R6S\R6S.Build.cs">
       <Filter>Source\R6S</Filter>
@@ -45,7 +45,7 @@
       <Filter>Source\R6S</Filter>
     </ClInclude>
     <Filter Include="Source\R6S\Private">
-      <UniqueIdentifier>{7AEE7D32-6EBB-45C2-93D7-7071E4146963}</UniqueIdentifier>
+      <UniqueIdentifier>{B2AC832D-1B3B-4A37-B99B-D82A3193653F}</UniqueIdentifier>
     </Filter>
     <ClCompile Include="..\..\Source\R6S\Private\BaseCharacter.cpp">
       <Filter>Source\R6S\Private</Filter>
@@ -53,19 +53,13 @@
     <ClCompile Include="..\..\Source\R6S\Private\Gun.cpp">
       <Filter>Source\R6S\Private</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\R6S\Private\MyCharacter.cpp">
-      <Filter>Source\R6S\Private</Filter>
-    </ClCompile>
     <Filter Include="Source\R6S\Public">
-      <UniqueIdentifier>{67CB96CD-A308-4E96-B956-E901E2D9015F}</UniqueIdentifier>
+      <UniqueIdentifier>{06413B74-48E4-41CD-96E8-74DDF39203D9}</UniqueIdentifier>
     </Filter>
     <ClInclude Include="..\..\Source\R6S\Public\BaseCharacter.h">
       <Filter>Source\R6S\Public</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\R6S\Public\Gun.h">
-      <Filter>Source\R6S\Public</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\R6S\Public\MyCharacter.h">
       <Filter>Source\R6S\Public</Filter>
     </ClInclude>
   </ItemGroup>

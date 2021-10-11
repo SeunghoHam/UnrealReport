@@ -32,19 +32,11 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-	
-	virtual float TakeDamage(float DamageAmount, 
-		struct FDamageEvent const& DamageEvent, 
-		class AController* EventInstigator, 
-		AActor* DamageCauser) override;
 
+	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser) override;
 
-
-	
-	void Damage(int Damage) { CurrentHealth -= Damage; }
 	int GetCurrentHealth() const { return CurrentHealth; }
 
-	
 	virtual void Die();
 
 	UFUNCTION(BlueprintImplementableEvent)
@@ -63,34 +55,35 @@ protected:
 
 	void ReleasedFire();
 
+	void PressedReload();
+
 	UFUNCTION(BlueprintImplementableEvent)
 	void OnPressedFire();
 
 	UFUNCTION()
 	virtual void OnRep_WeaponActor();
 
-	/* [Client + Server] 총기를 셋업하는 함수 */
+	/** [Client + Server] 총기를 셋업하는 함수 */
 	virtual void SetupWeapon();
 
 	UFUNCTION(BlueprintImplementableEvent)
 	void OnSetupWeapon();
-	
+
 	UFUNCTION()
 	void OnRep_IsDead();
-	 
+
 protected:
 	UPROPERTY(BlueprintReadWrite, ReplicatedUsing=OnRep_WeaponActor)
 	AActor* WeaponActor;
 
-	/*최대체력*/
-	UPROPERTY(BlueprintReadWrite)
+	/** 최대 체력 */
+	UPROPERTY(EditDefaultsOnly)
 	int MaxHealth;
 
-	/*현재체력*/
+	/** 현재 체력*/
 	UPROPERTY(BlueprintReadWrite)
 	int CurrentHealth;
 
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing=OnRep_IsDead)
-	bool IseDead;
+	bool IsDead;
 };
- 

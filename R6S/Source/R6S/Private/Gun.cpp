@@ -4,52 +4,192 @@
 #include "Gun.h"
 #include "BaseCharacter.h"
 #include "DrawDebugHelpers.h"
+#include "Net/UnrealNetwork.h"
 
 // Sets default values
 AGun::AGun()
 {
 	bReplicates = true;
 
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	DamagePerBullet = 0;
+	MaxAmmoPerMagazine = 30;
+	InitialAmmoCount = 150;
+	CurrentLeftAmmo = InitialAmmoCount;
+	LeftAmmoInMagazine = MaxAmmoPerMagazine;
+
+	bIsStartedReload = false;
+}
+
+bool AGun::CanFire() const
+{
+	return LeftAmmoInMagazine > 0 && !IsStartedReload();
 }
 
 void AGun::Fire()
 {
-	// Muzzle 위치에서 발사 (Linetrace) 및 발사 애니메이션 재생
+	// 발사 불가능 한 경우 무시
+	if (CanFire() == false)
+		return;
 
-	if(!GetOwner()->HasAuthority())
+	// 싱글이 아닌 경우, Fire 동기화!
+	if (GetNetMode() != ENetMode::NM_Standalone)
 	{
-		ServerFire();
+		APawn* Pawn = Cast<APawn>(GetOwner());
+		if (Pawn)
+		{
+			// 총의 Owner 가 Locally Controlled 인 경우만 Fire 동기화!!!
+			if (Pawn->IsLocallyControlled())
+			{
+				// 서버에서 호출한 경우 모든 클라에게 동기화
+				if (Pawn->HasAuthority())
+				{
+					MulticastFire(true);
+				}
+				// 클라에서 호출한 경우 서버로 동기화
+				else
+				{
+					ServerFire();
+				}
+			}
+		}
+		else
+		{
+			// 총기의 Owner 가 없거나, Pawn 이 아닌 경우...
+		}
 	}
 
 	UE_LOG(LogTemp, Log, TEXT("Im Fire"));
 
 	OnFire();
-}
- 
 
-/*APawn* Pawn = Cast<APawn>(GetOwner());
-if (Pawn != nullptr && Pawn->IsLocallyControlled())*/
+	if (HasAuthority())
+	{
+		// 실제 발사할 시작 위치
+		FVector StartFireLocation; // Line Trace 시작 위치
+		FVector EndFireLocation; // Line Trace 끝 위치
+		FVector FireDirection;
+
+		if (GetOwner() != nullptr)
+		{
+			FVector EyeLocation; // 현재 Eye(Actor Location + APawn::BaseEyeHeight) 위치
+			FRotator EyeRotation; // 현재 카메라가 보고있는 방향
+			GetOwner()->GetActorEyesViewPoint(EyeLocation, EyeRotation);
+
+			StartFireLocation = EyeLocation;
+
+			FireDirection = EyeRotation.Vector();
+			EndFireLocation = StartFireLocation + FireDirection * 10000;
+		}
+
+		FHitResult Hit;
+		FCollisionQueryParams QueryParams;
+		QueryParams.AddIgnoredActor(this); // 발사하는 Gun 엑터 제외
+		QueryParams.AddIgnoredActor(GetOwner()); // 발사하는 Gun 엑터를 가지고있는 캐릭터도 제외
+		if (GetWorld()->LineTraceSingleByObjectType(Hit, StartFireLocation, EndFireLocation, FCollisionObjectQueryParams(ECollisionChannel::ECC_Pawn), QueryParams))
+		{
+			DrawDebugLine(GetWorld(), StartFireLocation, EndFireLocation, FColor::Red, false, 10.f, SDPG_World, 1.f);
+			DrawDebugSphere(GetWorld(), Hit.ImpactPoint, 10.f, 12, FColor::Green, false, 10.f, SDPG_World, 1.f);
+
+			UE_LOG(LogTemp, Log, TEXT("누군가 맞음! 맞은 놈 -> %s"), *Hit.Actor->GetName());
+
+			ABaseCharacter* BaseCharacter = Cast<ABaseCharacter>(Hit.Actor);
+			if (BaseCharacter != nullptr)
+			{
+				FPointDamageEvent DamageEvent;
+				DamageEvent.DamageTypeClass = nullptr;
+				DamageEvent.Damage = DamagePerBullet;
+				DamageEvent.HitInfo = Hit;
+				DamageEvent.ShotDirection = FireDirection;
+
+				BaseCharacter->TakeDamage(DamagePerBullet, DamageEvent, BaseCharacter->GetController(), BaseCharacter);
+
+				UE_LOG(LogTemp, Log, TEXT("맞은 사람 현재 체력 %d"), BaseCharacter->GetCurrentHealth());
+			}
+		}
+		else
+		{
+			DrawDebugLine(GetWorld(), StartFireLocation, EndFireLocation, FColor::Blue, false, 10.f, SDPG_World, 1.f);
+		}
+	}
+}
+
+bool AGun::CanReload() const
+{
+	return
+		// 남은 탄 없으면 리로딩 불가
+		CurrentLeftAmmo > 0 &&
+		// 이미 리로딩 중인 상태이면은 리로딩 불가
+		IsStartedReload() == false;
+}
+
+void AGun::Reload()
+{
+	if (CanReload() == false)
+		return;
+
+	StartReload();
+}
+
+void AGun::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+
+	DOREPLIFETIME(AGun, CurrentLeftAmmo);
+	DOREPLIFETIME(AGun, LeftAmmoInMagazine);
+}
+
+void AGun::PostInitProperties()
+{
+	Super::PostInitProperties();
+
+	CurrentLeftAmmo = InitialAmmoCount;
+}
+
+#if WITH_EDITOR
+void AGun::PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent)
+{
+	Super::PostEditChangeProperty(PropertyChangedEvent);
+
+	if (PropertyChangedEvent.GetPropertyName() == TEXT("InitialAmmoCount"))
+	{
+		CurrentLeftAmmo = InitialAmmoCount;
+	}
+}
+#endif
 
 FVector AGun::GetMuzzleLocation_Implementation() const
 {
 	return GetActorLocation();
 }
 
-// 서버에서 실행. Multicast함수는 서버에서 실행시켜야 유효하다.
-
-/*void AGun::MulticastFire_Implementation()
+void AGun::StartReload()
 {
-	if (GetOwner()->HasAuthority() && GetOwner()->GetLocalRole() == ENetRole::ROLE_SimulatedProxy)
-	{
-		Fire();
-	}
-	
-}*/
+	UE_LOG(LogTemp, Log, TEXT("Start Reload!"));
 
+	bIsStartedReload = true;
 
+	OnStartReload();
+}
+
+bool AGun::IsStartedReload_Implementation() const
+{
+	return bIsStartedReload;
+}
+
+void AGun::EndReload()
+{
+	if (IsStartedReload() == false)
+		return;
+
+	UE_LOG(LogTemp, Log, TEXT("End Reload!"));
+
+	const int UsedAmmoInMagazine = MaxAmmoPerMagazine - LeftAmmoInMagazine;
+	CurrentLeftAmmo -= UsedAmmoInMagazine;
+	LeftAmmoInMagazine = MaxAmmoPerMagazine;
+}
 
 // Called when the game starts or when spawned
 void AGun::BeginPlay()
@@ -66,76 +206,25 @@ void AGun::Tick(float DeltaTime)
 
 void AGun::ServerFire_Implementation()
 {
-	MulticastFire();
-	UE_LOG(LogTemp, Log, TEXT("Im ServerFire"));
+	Fire();
 
-
-
-	// 실제 발사할 시작 위치
-	FVector StartFireLocation; // Line Trace 시작 위치
-	FVector EndFireLocation; // Line Trace 끝 위치
-	FVector FireDirection;
-
-
-	if (GetOwner() != nullptr)
-	{
-		FVector EyeLocation; // 현재 Eye(BaseCharacter 클래스의 경우 Actor Location + Eye) 위치
-		FRotator EyeRotation;
-		GetOwner()->GetActorEyesViewPoint(EyeLocation, EyeRotation);
-		// 총기를 가지고 있는 엑터의 GetActorEyesViewPoint 를 사용해서 
-		// 엑터의 눈의 위치와 바라보고 있는 방향 정보를 가지고 
-		// 라인트레이스 시작지점과 끝지점을 정해줌.
-		StartFireLocation = EyeLocation;
-
-		FireDirection = EyeRotation.Vector();
-		EndFireLocation = StartFireLocation + FireDirection * 10000;
-		// 끝점 = 시작점 + 발사 방향 벡터* 사정거리
-	}
-
-
-	FHitResult Hit;
-	FCollisionQueryParams QueryParams; // 
-	QueryParams.AddIgnoredActor(this); // 발사하는 Gun 엑터 제외
-	QueryParams.AddIgnoredActor(GetOwner()); // 발사하는 Gun 엑터를 가지고 있는 캐릭터도 제외
-
-
-
-	if (GetWorld()->LineTraceSingleByObjectType(Hit, StartFireLocation, EndFireLocation, 
-		FCollisionObjectQueryParams(ECollisionChannel::ECC_Pawn), QueryParams)) 
-	{
-		DrawDebugLine(GetWorld(), StartFireLocation, EndFireLocation, FColor::Red, false, 10.f, SDPG_World, 1.f);
-		DrawDebugSphere(GetWorld(), Hit.ImpactPoint, 25.f, 12, FColor::Green, false, 10.f, SDPG_World, 1.f);
-
-		UE_LOG(LogTemp, Log, TEXT("누군가 맞음! 맞은 대상 -> %s"), *Hit.Actor->GetName());
-
-		ABaseCharacter* BaseCharacter = Cast<ABaseCharacter>(Hit.Actor);
-		if (BaseCharacter != nullptr)
-		{
-			FPointDamageEvent DamageEvent; // 한 점에 데미지
-			FRadialDamageEvent; // 원형데미지(ex 수류탄)
-
-			DamageEvent.DamageTypeClass = nullptr;
-			DamageEvent.Damage = DamagePerBullet;
-			DamageEvent.HitInfo = Hit;
-			DamageEvent.ShotDirection = FireDirection;
-
-			BaseCharacter->TakeDamage(DamagePerBullet, DamageEvent, BaseCharacter->GetController(), BaseCharacter);
-			UE_LOG(LogTemp, Log, TEXT("맞은 대상 현재 체력 %d"), BaseCharacter->GetCurrentHealth());
-		}
-	}
-	else
-	{
-		DrawDebugLine(GetWorld(), StartFireLocation, EndFireLocation, FColor::Blue, false, 10.f, SDPG_World, 1.f);
-	}
-	OnServerFire();
+	MulticastFire(false);
 }
 
-
-
-void AGun::MulticastFire_Implementation()
+void AGun::MulticastFire_Implementation(bool NeedIncludeAutonomousProxy)
 {
-	if (!GetOwner()->HasAuthority() && GetOwner()->GetLocalRole() == ENetRole::ROLE_SimulatedProxy)
+	if (HasAuthority() == false)
 	{
-		Fire();
+		if (NeedIncludeAutonomousProxy)
+		{
+			Fire();
+		}
+		else
+		{
+			if (GetOwner()->GetLocalRole() == ROLE_SimulatedProxy)
+			{
+				Fire();
+			}
+		}
 	}
 }

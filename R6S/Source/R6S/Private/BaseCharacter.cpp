@@ -31,23 +31,21 @@ void ABaseCharacter::BeginPlay()
 	{
 		SetupWeapon();
 	}
-	/*
-	if (IsLocallyControlled())
-	{
-		bUseControllerRotationPitch = true;
-	}
-	else
-	{
-		bUseControllerRotationPitch = false;
-	}
-	*/
+
+	//if (IsLocallyControlled())
+	//{
+	//	bUseControllerRotationPitch = true;
+	//}
+	//else
+	//{
+	//	bUseControllerRotationPitch = false;
+	//}
 }
 
 // Called every frame
 void ABaseCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
 // Called to bind functionality to input
@@ -63,6 +61,8 @@ void ABaseCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 
 	PlayerInputComponent->BindAction(TEXT("Fire"), EInputEvent::IE_Pressed, this, &ABaseCharacter::PressedFire);
 	PlayerInputComponent->BindAction(TEXT("Fire"), EInputEvent::IE_Released, this, &ABaseCharacter::ReleasedFire);
+
+	PlayerInputComponent->BindAction(TEXT("Reload"), EInputEvent::IE_Pressed, this, &ABaseCharacter::PressedReload);
 }
 
 void ABaseCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
@@ -70,10 +70,9 @@ void ABaseCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLi
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 
 	DOREPLIFETIME(ABaseCharacter, WeaponActor);
-	DOREPLIFETIME(ABaseCharacter, IseDead);
+	DOREPLIFETIME(ABaseCharacter, IsDead);
 }
 
- 
 void ABaseCharacter::MoveForward(float AxisValue)
 {
 	FRotator ControlRotation = FRotator(0, GetControlRotation().Yaw, 0);
@@ -102,6 +101,10 @@ void ABaseCharacter::LookUp(float AxisValue)
 
 void ABaseCharacter::PressedFire()
 {
+	// 죽었을 경우 발사처리 안하도록
+	if (IsDead)
+		return;
+
 	AGun* Gun = Cast<AGun>(WeaponActor);
 	if (Gun)
 	{
@@ -115,41 +118,50 @@ void ABaseCharacter::ReleasedFire()
 {
 }
 
+void ABaseCharacter::PressedReload()
+{
+	// 죽었을 경우 리로드 불가
+	if (IsDead)
+		return;
+
+	AGun* Gun = Cast<AGun>(WeaponActor);
+	if (Gun)
+	{
+		Gun->Reload();
+	}
+}
+
 void ABaseCharacter::OnRep_WeaponActor()
 {
 	SetupWeapon();
 }
-
 
 void ABaseCharacter::SetupWeapon()
 {
 	OnSetupWeapon();
 }
 
-
-float ABaseCharacter::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
+float ABaseCharacter::TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser)
 {
 	CurrentHealth -= DamageAmount;
 
 	if (CurrentHealth <= 0)
 	{
+		IsDead = true;
 		Die();
 	}
+
 	return Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
 }
- 
+
 void ABaseCharacter::OnRep_IsDead()
 {
-	if(HasAuthority()== false)
-	{
-		Die();
-	}
+	Die();
 }
 
 void ABaseCharacter::Die()
 {
-	OnDie(); 
+	OnDie();
+
+	//Destroy();
 }
-
-
-

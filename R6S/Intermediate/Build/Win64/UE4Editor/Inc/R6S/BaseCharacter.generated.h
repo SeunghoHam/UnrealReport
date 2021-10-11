@@ -39,8 +39,8 @@ public: \
 	{ \
 		NETFIELD_REP_START=(uint16)((int32)Super::ENetFields_Private::NETFIELD_REP_END + (int32)1), \
 		WeaponActor=NETFIELD_REP_START, \
-		IseDead, \
-		NETFIELD_REP_END=IseDead	}; \
+		IsDead, \
+		NETFIELD_REP_END=IsDead	}; \
 	NO_API virtual void ValidateGeneratedRepEnums(const TArray<struct FRepRecord>& ClassReps) const override;
 
 
@@ -55,8 +55,8 @@ public: \
 	{ \
 		NETFIELD_REP_START=(uint16)((int32)Super::ENetFields_Private::NETFIELD_REP_END + (int32)1), \
 		WeaponActor=NETFIELD_REP_START, \
-		IseDead, \
-		NETFIELD_REP_END=IseDead	}; \
+		IsDead, \
+		NETFIELD_REP_END=IsDead	}; \
 	NO_API virtual void ValidateGeneratedRepEnums(const TArray<struct FRepRecord>& ClassReps) const override;
 
 
@@ -88,7 +88,7 @@ public: \
 	FORCEINLINE static uint32 __PPO__WeaponActor() { return STRUCT_OFFSET(ABaseCharacter, WeaponActor); } \
 	FORCEINLINE static uint32 __PPO__MaxHealth() { return STRUCT_OFFSET(ABaseCharacter, MaxHealth); } \
 	FORCEINLINE static uint32 __PPO__CurrentHealth() { return STRUCT_OFFSET(ABaseCharacter, CurrentHealth); } \
-	FORCEINLINE static uint32 __PPO__IseDead() { return STRUCT_OFFSET(ABaseCharacter, IseDead); }
+	FORCEINLINE static uint32 __PPO__IsDead() { return STRUCT_OFFSET(ABaseCharacter, IsDead); }
 
 
 #define R6S_Source_R6S_Public_BaseCharacter_h_10_PROLOG \

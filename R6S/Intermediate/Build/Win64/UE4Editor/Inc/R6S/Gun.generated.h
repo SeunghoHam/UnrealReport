@@ -16,23 +16,31 @@ struct FVector;
 
 #define R6S_Source_R6S_Public_Gun_h_12_SPARSE_DATA
 #define R6S_Source_R6S_Public_Gun_h_12_RPC_WRAPPERS \
-	virtual FVector GetMuzzleLocation_Implementation() const; \
-	virtual void MulticastFire_Implementation(); \
+	virtual void MulticastFire_Implementation(bool NeedIncludeAutonomousProxy); \
 	virtual void ServerFire_Implementation(); \
+	virtual FVector GetMuzzleLocation_Implementation() const; \
+	virtual bool IsStartedReload_Implementation() const; \
  \
-	DECLARE_FUNCTION(execGetMuzzleLocation); \
 	DECLARE_FUNCTION(execMulticastFire); \
-	DECLARE_FUNCTION(execServerFire);
+	DECLARE_FUNCTION(execServerFire); \
+	DECLARE_FUNCTION(execGetMuzzleLocation); \
+	DECLARE_FUNCTION(execIsStartedReload); \
+	DECLARE_FUNCTION(execCanReload); \
+	DECLARE_FUNCTION(execCanFire);
 
 
 #define R6S_Source_R6S_Public_Gun_h_12_RPC_WRAPPERS_NO_PURE_DECLS \
-	virtual FVector GetMuzzleLocation_Implementation() const; \
-	virtual void MulticastFire_Implementation(); \
+	virtual void MulticastFire_Implementation(bool NeedIncludeAutonomousProxy); \
 	virtual void ServerFire_Implementation(); \
+	virtual FVector GetMuzzleLocation_Implementation() const; \
+	virtual bool IsStartedReload_Implementation() const; \
  \
-	DECLARE_FUNCTION(execGetMuzzleLocation); \
 	DECLARE_FUNCTION(execMulticastFire); \
-	DECLARE_FUNCTION(execServerFire);
+	DECLARE_FUNCTION(execServerFire); \
+	DECLARE_FUNCTION(execGetMuzzleLocation); \
+	DECLARE_FUNCTION(execIsStartedReload); \
+	DECLARE_FUNCTION(execCanReload); \
+	DECLARE_FUNCTION(execCanFire);
 
 
 #define R6S_Source_R6S_Public_Gun_h_12_EVENT_PARMS \
@@ -45,6 +53,20 @@ struct FVector;
 			: ReturnValue(ForceInit) \
 		{ \
 		} \
+	}; \
+	struct Gun_eventIsStartedReload_Parms \
+	{ \
+		bool ReturnValue; \
+ \
+		/** Constructor, initializes return property only **/ \
+		Gun_eventIsStartedReload_Parms() \
+			: ReturnValue(false) \
+		{ \
+		} \
+	}; \
+	struct Gun_eventMulticastFire_Parms \
+	{ \
+		bool NeedIncludeAutonomousProxy; \
 	};
 
 
@@ -55,7 +77,14 @@ private: \
 	friend struct Z_Construct_UClass_AGun_Statics; \
 public: \
 	DECLARE_CLASS(AGun, AActor, COMPILED_IN_FLAGS(0 | CLASS_Config), CASTCLASS_None, TEXT("/Script/R6S"), NO_API) \
-	DECLARE_SERIALIZER(AGun)
+	DECLARE_SERIALIZER(AGun) \
+	enum class ENetFields_Private : uint16 \
+	{ \
+		NETFIELD_REP_START=(uint16)((int32)Super::ENetFields_Private::NETFIELD_REP_END + (int32)1), \
+		CurrentLeftAmmo=NETFIELD_REP_START, \
+		LeftAmmoInMagazine, \
+		NETFIELD_REP_END=LeftAmmoInMagazine	}; \
+	NO_API virtual void ValidateGeneratedRepEnums(const TArray<struct FRepRecord>& ClassReps) const override;
 
 
 #define R6S_Source_R6S_Public_Gun_h_12_INCLASS \
@@ -64,7 +93,14 @@ private: \
 	friend struct Z_Construct_UClass_AGun_Statics; \
 public: \
 	DECLARE_CLASS(AGun, AActor, COMPILED_IN_FLAGS(0 | CLASS_Config), CASTCLASS_None, TEXT("/Script/R6S"), NO_API) \
-	DECLARE_SERIALIZER(AGun)
+	DECLARE_SERIALIZER(AGun) \
+	enum class ENetFields_Private : uint16 \
+	{ \
+		NETFIELD_REP_START=(uint16)((int32)Super::ENetFields_Private::NETFIELD_REP_END + (int32)1), \
+		CurrentLeftAmmo=NETFIELD_REP_START, \
+		LeftAmmoInMagazine, \
+		NETFIELD_REP_END=LeftAmmoInMagazine	}; \
+	NO_API virtual void ValidateGeneratedRepEnums(const TArray<struct FRepRecord>& ClassReps) const override;
 
 
 #define R6S_Source_R6S_Public_Gun_h_12_STANDARD_CONSTRUCTORS \
@@ -91,7 +127,12 @@ public: \
 	DEFINE_DEFAULT_CONSTRUCTOR_CALL(AGun)
 
 
-#define R6S_Source_R6S_Public_Gun_h_12_PRIVATE_PROPERTY_OFFSET
+#define R6S_Source_R6S_Public_Gun_h_12_PRIVATE_PROPERTY_OFFSET \
+	FORCEINLINE static uint32 __PPO__CurrentLeftAmmo() { return STRUCT_OFFSET(AGun, CurrentLeftAmmo); } \
+	FORCEINLINE static uint32 __PPO__LeftAmmoInMagazine() { return STRUCT_OFFSET(AGun, LeftAmmoInMagazine); } \
+	FORCEINLINE static uint32 __PPO__bIsStartedReload() { return STRUCT_OFFSET(AGun, bIsStartedReload); }
+
+
 #define R6S_Source_R6S_Public_Gun_h_9_PROLOG \
 	R6S_Source_R6S_Public_Gun_h_12_EVENT_PARMS
 
